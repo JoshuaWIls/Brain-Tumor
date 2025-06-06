@@ -9,14 +9,15 @@ import io
 
 app = FastAPI()
 
+
 origins = [
-    "http://localhost:5173",      # Vite
-    "http://127.0.0.1:5173"     #python server
+    "http://localhost:5173",
+    "https://brain-tumor-vq4i.onrender.com/",
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,        
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -31,7 +32,7 @@ IMG_SIZE = 224
 def root():
     return {"message": "Brain Tumor Classifier API is running."}
 
-@app.post("/api/predict")
+@app.post("https://brain-tumor-vq4i.onrender.com/api/predict")
 async def predict(file: UploadFile = File(...)):
     if not file.filename:
         raise HTTPException(status_code=400, detail="No file uploaded")
