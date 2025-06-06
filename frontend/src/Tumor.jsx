@@ -33,10 +33,10 @@ export default function Tumor() {
     formData.append("file", image);
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/predict", {
-  method: "POST",
-  body: formData,
-});
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/predict`, {
+        method: "POST",
+        body: formData,
+      });
       const data = await res.json();
       setResult(data.prediction);
     } catch (error) {
